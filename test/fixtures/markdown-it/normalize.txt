@@ -107,3 +107,59 @@ test xn--n3h@xn--n3h.net foo
 .
 <p>test <a href="mailto:xn--n3h@xn--n3h.net">xn--n3h@☃.net</a> foo</p>
 .
+
+
+Keep square brackets around IPv6 literals in host, encode them elsewhere:
+
+.
+[foo](http://[2001:db8::1]:1896/a[b]?x=[y])
+.
+<p><a href="http://[2001:db8::1]:1896/a%5Bb%5D?x=%5By%5D">foo</a></p>
+.
+
+.
+[foo](//[::ffff:192.0.2.1]/)
+.
+<p><a href="//[::ffff:192.0.2.1]/">foo</a></p>
+.
+
+.
+[foo](http://user:password@[2001:db8:0:0:0:0:0:1]:1926/)
+.
+<p><a href="http://user:password@[2001:db8:0:0:0:0:0:1]:1926/">foo</a></p>
+.
+
+
+IPv6 in reference-style links:
+
+.
+[foo][r]
+
+[r]: http://[2001:db8::2]:80/p[q]?x=[y]
+.
+<p><a href="http://[2001:db8::2]:80/p%5Bq%5D?x=%5By%5D">foo</a></p>
+.
+
+
+IPv6 in angle-bracket autolinks, text stays verbatim:
+
+.
+<http://[2001:db8::3]:8080/a[b]>
+.
+<p><a href="http://[2001:db8::3]:8080/a%5Bb%5D">http://[2001:db8::3]:8080/a[b]</a></p>
+.
+
+
+IPv6 in image sources:
+
+.
+![foo](http://[2001:db8::4]:9000/img.png)
+.
+<p><img src="http://[2001:db8::4]:9000/img.png" alt="foo"></p>
+.
+
+.
+![foo](//[2001:db8::5]/a[b])
+.
+<p><img src="//[2001:db8::5]/a%5Bb%5D" alt="foo"></p>
+.
