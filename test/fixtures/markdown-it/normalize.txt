@@ -107,3 +107,63 @@ test xn--n3h@xn--n3h.net foo
 .
 <p>test <a href="mailto:xn--n3h@xn--n3h.net">xn--n3h@☃.net</a> foo</p>
 .
+
+Keep square brackets around IPv6 hosts literal, but encode them in path and query, #996
+
+Inline link with port, path and query:
+
+.
+[foo](http://[2001:db8::1]:1896/a[b]?x=[y])
+.
+<p><a href="http://[2001:db8::1]:1896/a%5Bb%5D?x=%5By%5D">foo</a></p>
+.
+
+Protocol-relative link:
+
+.
+[foo](//[::ffff:192.0.2.1]/)
+.
+<p><a href="//[::ffff:192.0.2.1]/">foo</a></p>
+.
+
+Userinfo before IPv6 host:
+
+.
+[foo](http://user:password@[2001:db8:0:0:0:0:0:1]:1926/)
+.
+<p><a href="http://user:password@[2001:db8:0:0:0:0:0:1]:1926/">foo</a></p>
+.
+
+Reference link:
+
+.
+[foo][v6]
+
+[v6]: http://[fe80::1]/p[x]
+.
+<p><a href="http://[fe80::1]/p%5Bx%5D">foo</a></p>
+.
+
+Autolink, text must keep the brackets as well:
+
+.
+<http://[2001:db8::1]:80/>
+.
+<p><a href="http://[2001:db8::1]:80/">http://[2001:db8::1]:80/</a></p>
+.
+
+Image src:
+
+.
+![foo](http://[2001:db8::1]/a)
+.
+<p><img src="http://[2001:db8::1]/a" alt="foo"></p>
+.
+
+Brackets in hash are still encoded:
+
+.
+[foo](//[::1]/#h[x])
+.
+<p><a href="//[::1]/#h%5Bx%5D">foo</a></p>
+.
